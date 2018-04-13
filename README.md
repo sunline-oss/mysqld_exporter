@@ -1,4 +1,4 @@
-# Percona MySQL Server Exporter [![Build Status](https://travis-ci.org/percona/mysqld_exporter.svg?branch=master)](https://travis-ci.org/percona/mysqld_exporter)
+# Percona MySQL Server Exporter [![Build Status](https://travis-ci.org/sunline-oss/mysqld_exporter.svg?branch=master)](https://travis-ci.org/sunline-oss/mysqld_exporter)
 
 Prometheus exporter for MySQL server metrics.
 Supported MySQL versions: 5.1 and up.
