@@ -3,26 +3,26 @@ sudo: required
 language: go
 
 go:
-  - 1.9.x
+- 1.9.x
 
 env:
-  - MYSQL_IMAGE=mysql/mysql-server:5.7
+- MYSQL_IMAGE=mysql/mysql-server:5.7
 
 services:
-  - docker
+- docker
 
 go_import_path: github.com/percona/mysqld_exporter
 
 before_script:
-  - sudo service mysql stop
-  - docker --version
-  - docker-compose --version
-  - docker-compose up -d
+- sudo service mysql stop
+- docker --version
+- docker-compose --version
+- docker-compose up -d
 
 script:
-  - make
-  - make test
-  - make tarball
+- make
+- make test
+- make tarball
 
 notifications:
   email: false
@@ -30,7 +30,7 @@ notifications:
 deploy:
   provider: releases
   api_key:
-    secure: "Ic9dWf1BJrMTmFNU96vMfaYmLNkKBdqvJ6UlIRWwlLq43YkwInwAhSrSo9Vz6Aj0078hx+ax23ABnOEyf+r+ogHJ0hSvlhHXnJyiFDGKB4355VSX0ZJr+CHZM20WpZYWmzVKL2A0IbaqO7PXI2/KncPT9JxDtAe3AizuGgGEIBnyIQuEqU6sL97wbmaND0qDHbtV04plHI57d5nA5bDMj6D/ztbaZEgngUrBqAhc3h3lpHpRqUdQAsLHuCEkJwhqCVZaGL361qcaf29kbRRJ7QAMnRzF9BF7IX7ZbK92EDRGqn2o5v7MjyU688AdCJE7La9Rtj99/xpqN2zPd8kCVzXnz8Krpy+PIyVR0tyggnSCmamFl+F8WuTK7VAdcGhoUezhQiHxxqdhGTObJzceAdVRAFuv8wTsZg4wubiiG1j4HhzwfAr3GbCk4nC/usU55FzkDT+fi1EFABKfPCdImoDYf/DxhCfkBs9MCzuJmaJO2JLgaqoknJuq2qjZv9QasyWSUAAYRhkAb4Dt+yZnj4fFU1tFUcgZr3q9SHHM+8ZaNu5YEQ6x0aGgZasJzd0NKmhQkktSAVvgcx3V6OfPhc3ooIUqOVJhrWoMd0i64w7//n0i6GIhtL8oIraYHDJNmrzrAIo6ZkfeMI/25N/Ehtv6MADtW0Pqus20zSRsYKU="
+    secure: P279k6+rcKYu3ygrAtBqF7uEdyM39JqsgbXLn0vgoyKpDUje81UDdKikZ+8b3LCM/mmEv+BB5PU+7tvTOcEIP57yYLcUhJQtPjwmj/VbIXUiuzzS5SDkqDYfdR/5a58JGrD7xNJfioLqh8UeLsMEBv4oKWl8B4pihGPZ4wJxgEeP5bC1OoBL0Bx3nHFDtCraVxi9LiNU4fYvakqTMFmK6LneeN2d8JWOL6raO0FqoibwY47qpu3GKF3dLlV9wiPfMiSGG2IAU9jw6rq3dakaTQO28colh7ta6/Kz/CHZMWhlBae4AauirzBvC/m14LpwqWVaVZFrHcaA+LNwlpXpLAUGt37pWj9nUm05tnmRSX1KW8nANtAkPmmRw1tDi7qgtwu7aypYT2zVaFQ/VVqjrxmCH/+qpSuUETjhQJyYv7Ut0vszVZ+C0KZpxbxZYT6TogjsbZSlpGtfhRQoUXVcLzzZQEZP1/dh4xJca1VAgDWxb2KPm6eiC0+gvghNj9iWJ9qi9HVhpYtXmQX8dT8MI1Qo/VsJ0JcQ66DYcwEUqGv5bLX5EyEGBGu8bCjgNuQ0JMyS9Zo9Upr4P7MLZxq9sz9J0c9315eJFUsWBneRR2y8mwKCTZo9QYjWYvIW7mMguj5ZVmOlTMrgLp5Bfb7SO10myThNnB02d9l1Z4hz5rk=
   file: mysqld_exporter*.tar.gz
   skip_cleanup: true
   overwrite: true
