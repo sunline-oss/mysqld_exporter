@@ -3,31 +3,37 @@ sudo: required
 language: go
 
 go:
-- 1.9.x
-- 1.9.x
-- master
+  - 1.9.x
 
 env:
-- MYSQL_IMAGE=mysql/mysql-server:5.5
-- MYSQL_IMAGE=mysql/mysql-server:5.6
-- MYSQL_IMAGE=mysql/mysql-server:5.7
-- MYSQL_IMAGE=mysql/mysql-server:8.0
-- MYSQL_IMAGE=percona/percona-server:5.7
+  - MYSQL_IMAGE=mysql/mysql-server:5.7
 
 services:
-- docker
+  - docker
 
 go_import_path: github.com/percona/mysqld_exporter
 
 before_script:
-- sudo service mysql stop
-- docker --version
-- docker-compose --version
-- docker-compose up -d
+  - sudo service mysql stop
+  - docker --version
+  - docker-compose --version
+  - docker-compose up -d
 
 script:
-- make
-- make test
+  - make
+  - make test
+  - make tarball
 
 notifications:
   email: false
+
+deploy:
+  provider: releases
+  api_key:
+    secure: R9oE7K3RwFB1IEyCloqI4RtuIw4i8QCD/menP646+aprp4GGGKuPX6EtE0bOoTBd3oB06d9xQWXxRdf/Q+9BmNtt1efTw191Gk+F2bPOrO2pB6Z7ybT8Xy/Ee7q9pm1+c1zC0HmxqqqkSdgDF8vFVDG0xLlafLgHpgtPDnpsT3u0UQtK5IoufttvyshTC6xoIwB5fw0WUbVioHwrzPg2gazj9zMeMAriZicNSRvkmdJ1O74sB5PkFqtVICpXuP/fDQexjcqFgfI2derRtBscAkbH5UosZ9XVfPCuBdA9y1eTAETMdGbccr4OOuMqnRpmmnglzb6HlgXpHxyJCaxQrNnkmLalJzMAmDXYNmlvra16lVn9L6vF0FVX662Wydbldbjdy/Xy4CZTXA2OdCN4mzlZYlP5L+56V4B9lFzv9Ez3GzW7JoRyvk2efqkXwcUWDmZksaP4XeuiDTYk6HadnmcjTkSX+mcBIj7aMcA2VMzQo1EEyYinCet9mfgbo+/xaD63YkMSXdfK13RIxALTdy46KoymdfQmWtrjIYQVDG3jZkKKjfITuHDOE6MX7bNwSix2fd9Cqi5rxpKjTrzgTilmz6Jwcqv0oipm+h5X7HZbWdhYri/Bo/NDOxY7htO3lzSI3rbYkMZRbgStC7L8iyeR9tyOhSV+RxC1GVEW14M=
+  file: "mysqld_exporter*.tar.gz"
+  skip_cleanup: true
+  overwrite: true
+  on:
+    tags: true
+
