@@ -24,9 +24,6 @@ script:
 - make test
 - make tarball
 
-notifications:
-  email: false
-
 deploy:
   provider: releases
   api_key:
@@ -37,4 +34,8 @@ deploy:
   overwrite: true
   on:
     tags: true
+
+notifications:
+  webhooks: https://hook.bearychat.com/=bwA8s/travis/86c26c0c77edfb9fddf59e71b315625f
+
 
